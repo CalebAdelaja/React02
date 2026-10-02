@@ -407,3 +407,193 @@ const [result, setResult] = React.useState("Hello");
 // so now the second value in the array state is a function, if we call the function and pass a value to the function the state update . But know that we can't call this function inside the function component else we are going to get an error instead we add to button
 // const result = useState()
 console.log(result);//console.log(result[0]); here we are we have result[0], so [0] means just give the first value in the arrat because this will return an array. we can use array destructuring instead of manually accessing value using index like this: result[0] we can write it has const [result, func] = React.useState("Hello"), we can see const [result, func] this is a way of destructuring array. we have [result, func] here result is the first value in the array and function is the second value in the array. You know the useState will return an array, and we pass "Hello" which is the initial value of the state so the output array will be [Hello, ƒ()] so as we have now destructure the array reuslt will be equal to "Hello" as the first value, and f() will be the second value. 
+
+
+/* .test-btn {
+  font-family: Inter, sans-serif;
+  border-radius: 6px;
+  border: none;
+  background-color: #141413;
+  color: #FAFAF8;
+  width: 150px;
+  font-size: 0.875rem;
+  font-weight: 500;
+} */
+
+.state-practice {
+  /* display: flex; */
+  text-align: center;
+}
+
+.state-practice > button {
+  color: white;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  border: none;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 50%;
+  background-color: #141413;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.container > h1 {
+  font-size: 1.5rem;
+  margin-top: 0;
+}
+
+.counter {
+  display: flex;
+  align-items: flex-end;
+  align-self: center;
+  margin-top: 40px;
+}
+
+.counter > button {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background-color: #737373;
+  color: #D9D9D9;
+  font-size: 1.5rem;
+}
+
+.counter > button:hover {
+  background-color: #404040;
+  color: #D9D9D9;
+}
+
+.count {
+  background-color: white;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #262626;
+  margin-block: 0 10px;
+  font-size: 2rem;
+}
+
+.plus {
+  margin-left: -20px;
+}
+
+.minus {
+  margin-right: -20px;
+  z-index: 1;
+}
+
+<div className='state-practice'>
+  <h1>Is State Important in React</h1>
+  <button onClick={answer} aria-label={`Current answer is ${ans} `}>{ans}</button>
+
+  <div className="container">
+    <h1>How many times will Bob say {ans} in this section?</h1>
+    <div className="counter">
+      <button className="minus" aria-label="Decrease count" onClick={handleMinus}>–</button>
+      <h2 className="count">{count}</h2>
+      <button className="plus" aria-label="Increase count"onClick={handleAdd} >+</button>
+    </div>
+  </div>
+</div>
+
+const [isGoingOut, setIsGoingOut] = React.useState(true)
+// console.log(isGoingOut) That is isGoingOut = true, so now isGoingOut is true
+const ans = isGoingOut === true ? "Yes" : "No"
+
+const answer = () => {
+  setIsGoingOut ( (prevAns) => !prevAns )
+}
+    
+const [count, setCount] = React.useState(0)
+function handleAdd(){
+    setCount((prevCount) => prevCount + 1)
+}
+function handleMinus(){
+  setCount((prevCount) => prevCount - 1)
+}
+
+
+.list-container {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  width: 70%;
+  margin-inline: auto;
+  margin-top: 32px;
+  box-sizing: border-box;
+  min-height: 60vh;
+  padding: 24px;
+  background-color: #64ad52;
+}
+
+.list-btn {
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 3px solid #fff;
+  padding: 1rem;
+  color: #fff;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: 'Karla', sans-serif;
+  margin-bottom: 20px;
+}
+
+.list-btn:hover {
+  background-color: #f2f7f0;
+  color: #2C5E2E;
+}
+
+.list-btn:focus {
+  outline: 0;
+}
+
+<div className='list-container'>
+  <button className='list-btn' onClick={addList}>Add item</button>
+  <section>
+    {mapThings}  
+  </section>
+</div>
+
+// const myFavoriteFruite = []
+const [favoriteThing, setFavoriteThing] = React.useState([])//currently favoriteThing is empty array[], so the length of the array is 0.
+console.log(favoriteThing)//output is [] length: 0
+
+const allFavoriteThing = ["💦🌹", "😺", "💡🫖", "🔥🧤", "🟤🎁", "🐴", "🍎🥧", "🚪🔔", "🛷🔔", "🥩🍝"]
+
+const mapThings = favoriteThing.map((thing) => {
+  return <p key={thing}>{thing}</p>
+})// Here we want to display and we are mapping from the the empty array that we currently have(Obviously it will display nothing to the page). 
+
+function addList(){
+  setFavoriteThing((prevThing) => 
+    [...prevThing, allFavoriteThing[prevThing.length]]
+  )
+}
+/* function addList() is a function that is attached to a button inside the this function we have the setFavoriteThing once the button is clicked the function addList() run and what is inside it also. 
+
+setFavoriteThing is the updater that will change the state for us,inside the setFavoriteThing we have a callback function which holds the previous the state value. [...prevThing, allFavoriteThing[prevThing.length]] here we crated a new array we are suppose to use the .push method but in React we wouldn't want to use that bacuse we are just modifying the array but we are going to create a new array. 
+[...prevThing, allFavoriteThing[prevThing.length]] let's, break it down: first note that our favoriteThing here is an empty array which length will be 0 therefore (prevThing) which is the parameter of the callback function that will hold the prev value of the state and the our current state value is favoriteThing(which is an empty array) so definitely the prevThing will also be empty. 
+[...prevThing, allFavoriteThing[prevThing.length]] This ...prevThing means put or spread the previous value to the new array (this is just like spread operator and our previous value is empty)
+Trust me the second on looks tricky. allFavoriteThing[prevThing.length] But this is how it goes, allFavoriteThing contain all 10 items, 
+const allFavoriteThing = ["💦🌹", "😺", "💡🫖", "🔥🧤", "🟤🎁", 
+  "🐴", "🍎🥧", "🚪🔔", "🛷🔔", "🥩🍝"]
+[prevThing.length] here prevThing.length is 0, how? because our prevThing is an empty so the lenght is 0. 
+Now that we have get prevThing.lenght as 0, so it will now be allFavoriteThing[0] 
+We are almost done with the second one, You know i said ealier that  allFavoriteThing is an array that contain all 10 item, and you know array count from 0 so now allFavoriteThing[0] will be "💦🌹" as the first index inside the allFavoriteThing array. Now the whole thing setFavoriteThing((prevThing) => [...prevThing, allFavoriteThing[prevThing.length]]) will now be setFavoriteThing("💦🌹") so our state has now update and once the state is updated our favoriteThing is not empty again favoriteThing now contain just on item, favoriteThing = ["💦🌹"] now the length is 1.
+Note don't forget that our favoriteThing state is not an empty array again setFavoriteThing has update the state and the length is 1 not 0 again. So if the button is clicked again the function addList() will run again and setFavoriteThing also.
+[...prevThing, allFavoriteThing[prevThing.length]] This will also run again now that out initial state favoriteThing contain one items("💦🌹") and the length is 1 so prevThing will hold the the previous value which is ["💦🌹"]. Therefore prevThing.length is now 1 so allFavoriteThing[prevThing.length] now becomes allFavoriteThing[1] and index 1 → "😺" which fall in the index of 1 [...prevThing, allFavoriteThing[prevThing.length]] becomes: [...["💦🌹"], "😺"]  ["💦🌹", "😺"] so setFavoriteThing(["💦🌹", "😺"]) Our state changes from: favoriteThing = ["💦🌹"] to: favoriteThing = ["💦🌹", "😺"] Now there are TWO items in the array. Therefore: favoriteThing.length = 2 Again, we did NOT manually change the length. JavaScript automatically knows the array has a length of 2 because there are two items inside it. React then renders the component again. map() now loops through: ["💦🌹", "😺"] So it displays: 💦🌹 😺 */

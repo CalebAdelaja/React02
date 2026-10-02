@@ -2,7 +2,7 @@ import Header from './Components/Header'
 import './App.css'
 import Main from './Components/Main'
 
-function App(app) {
+function App() {
   
   return (
     <>
