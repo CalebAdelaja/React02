@@ -60,5 +60,47 @@ main {
   margin-right: 5px;
 }
 
+.card {
+  background-color: #0C4A6E;
+  width: 200px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  height: 350px;
+}
 
+.card .avatar {
+  width: 80%;
+  padding: 10%;
+  padding-bottom: 0;
+}
+
+.card .name {
+  margin-block: 13px;
+  color: #fff;
+}
+
+.card .info {
+  padding: 10px;
+}
+
+.card .favorite {
+  width: 25px;
+  cursor: pointer;
+}
+
+.card .contact {
+  font-size: 0.75rem;
+  color: #eee;
+  margin-block: 7px;
+}
+
+.card .favorite-button {
+  border: none;
+  background: transparent;
+}
+
+.card .favorite-button:active {
+  transform: none;
+  box-shadow: none;
+}
 
