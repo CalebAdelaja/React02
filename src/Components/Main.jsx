@@ -1,8 +1,8 @@
 // import { useState } from "react"
 import React from 'react'
-import avatar from './Images/user.png'
-import starEmpty from './Images/star-empty.png'
-import StarFilled from './Images/star-filled.png'
+// import avatar from './Images/user.png'
+// import starEmpty from './Images/star-empty.png'
+// import StarFilled from './Images/star-filled.png'
 
 const Main = () => {
 
@@ -15,6 +15,7 @@ const Main = () => {
     })
     function addIngredient(e){
         e.preventDefault()
+        // Readthe form data
         const formData = new FormData(e.currentTarget)
         const newIngredient = formData.get("ingredient")
         setIngredients((prevIngredient) => {
@@ -23,53 +24,20 @@ const Main = () => {
         })
     }
     console.log(ingredient)
-    /* Object in state */
-    const[contacts, setContact] = React.useState({
-        firstName: "Native",
-        lastName: "Coder",
-        phone: "+234 805 052 1459",
-        email: "caleb0@gmail.com",
-        isFavorite: true
-    })
-    /* Here, contact is an object stored inside React state. The object contains five properties: firstName, lastName, phone, email, isFavorite and each has their value. So, contacts.firstName is Ade, contact.lastName is Caleb, contact.phone is +234 805 052 1459, contact.email is caleb0@gmail.com, contact.isFavorite is true.
-    changing an object in state, if you do contacts.firstName = Bolu and  contact.lastName = chris it can't change the state, but you're just change the javascript object and you're modifying, Note: Don't directly modify the existing object. Instead create a new object and give it to the setter.
-    setContact(
-        firstName: "Bolu"
-        lastName = "Chris"
-    )
-    But what if I only want to change one property i can:
-    setPerson({
-        name: "John"
-    }) but there's a problem here, you eventually saying i create a new object that only has one property 
-    So how do we preserve the other properties, by using the spread operator: 
-    setPerson({
-        ...contact //you're essentially spreading its properties into a new object
-        name: "John"
-    }) 
-    Updating an object using the previous state. Instead of applying changes we all know we need a callback function to hold the previous value the we are going to applychanges to the previous vlaue itself. 
-    setContact((prevContact) => {
-      return {
-        ...prevContact,
-        
-      }  
-    })
-    */
 
-    console.log(contacts);
-    /* When the button star is clicked it showed update to filled star if isFavorite is false it should be empty and if isFavorite is true it should be filled */
-    
-    const startToggle = contacts.isFavorite === true ? StarFilled : starEmpty
-
-    const toggleFavorite = function(){
-        console.log("Added to Favorite")
-        setContact((prevContact) => {
-            return {
-                ...prevContact,
-                firstName: prevContact.firstName = "Ade",
-                lastName: prevContact.lastName = "Caleb",
-                isFavorite: prevContact.isFavorite === false
-            }
-        })
+    const handleSubmit = (event) => {
+        console.log(event)
+        event.preventDefault()
+        const form = event.currentTarget// get the whole form node, the currentTarget is the element where the event handler was attached.
+        console.log(form)
+        const formData = new FormData(form)// create a new formData and pass in the whole form node right, Create a new FormData object using this form as the source of the data. "Create a FormData object and tell it to collect the data from this particular form."
+        console.log(formData)
+        console.log(FormData)
+        const email = formData.get("email") //Here we get acces to the actual data from the form and use the name property in the input to get the data from the form. FormData, give me the value associated with the name email / Give me the value belonging to the field whose name is email.
+        console.log(email)
+        const password =formData.get("password")
+        console.log(password)
+        form.reset()
     }
     
   return (
@@ -90,33 +58,18 @@ const Main = () => {
             {mapIngredients}
         </ul>
 
-        <article className="card">
-            <img
-                src={avatar}
-                className="avatar"
-                alt="User profile picture of John Doe"
-            />
-            <div className="info">
-                <button
-                    onClick={toggleFavorite}
-                    aria-pressed={startToggle}
-                    aria-label={contacts.isFavorite ? "Remove to Favorites" : "Add to Favorite" }
-                    className="favorite-button"
-                >
-                    <img
-                        src={startToggle}
-                        alt={contacts.isFavorite ? "filled star" : "empty star icon"}
-                        className="favorite"
-                    />
-                </button>
-                <h2 className="name">
-                    {`${contacts.firstName} ${contacts.lastName}`} 
-                </h2>
-                <p className="contact">{contacts.phone}</p>
-                <p className="contact">{contacts.email}</p>
-            </div>
+        <section>
+            <h1>Signup Form</h1>
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="email">Email:</label>
+                <input type="email" id='email' name='email' placeholder='email'  className='signup-input' />
+                <br />
+                <label htmlFor="password">Password:</label>
+                <input type="password" id='password' name='password' placeholder='password' className='signup-input'/>
 
-        </article>
+                <button className='sign-up-btn'>Submit</button>
+            </form>
+        </section>
 
     </main>
     

@@ -597,3 +597,145 @@ Now that we have get prevThing.lenght as 0, so it will now be allFavoriteThing[0
 We are almost done with the second one, You know i said ealier that  allFavoriteThing is an array that contain all 10 item, and you know array count from 0 so now allFavoriteThing[0] will be "💦🌹" as the first index inside the allFavoriteThing array. Now the whole thing setFavoriteThing((prevThing) => [...prevThing, allFavoriteThing[prevThing.length]]) will now be setFavoriteThing("💦🌹") so our state has now update and once the state is updated our favoriteThing is not empty again favoriteThing now contain just on item, favoriteThing = ["💦🌹"] now the length is 1.
 Note don't forget that our favoriteThing state is not an empty array again setFavoriteThing has update the state and the length is 1 not 0 again. So if the button is clicked again the function addList() will run again and setFavoriteThing also.
 [...prevThing, allFavoriteThing[prevThing.length]] This will also run again now that out initial state favoriteThing contain one items("💦🌹") and the length is 1 so prevThing will hold the the previous value which is ["💦🌹"]. Therefore prevThing.length is now 1 so allFavoriteThing[prevThing.length] now becomes allFavoriteThing[1] and index 1 → "😺" which fall in the index of 1 [...prevThing, allFavoriteThing[prevThing.length]] becomes: [...["💦🌹"], "😺"]  ["💦🌹", "😺"] so setFavoriteThing(["💦🌹", "😺"]) Our state changes from: favoriteThing = ["💦🌹"] to: favoriteThing = ["💦🌹", "😺"] Now there are TWO items in the array. Therefore: favoriteThing.length = 2 Again, we did NOT manually change the length. JavaScript automatically knows the array has a length of 2 because there are two items inside it. React then renders the component again. map() now loops through: ["💦🌹", "😺"] So it displays: 💦🌹 😺 */
+
+/* Object in state */
+    const[contacts, setContact] = React.useState({
+        firstName: "Native",
+        lastName: "Coder",
+        phone: "+234 805 052 1459",
+        email: "caleb0@gmail.com",
+        isFavorite: true
+    })
+    /* Here, contact is an object stored inside React state. The object contains five properties: firstName, lastName, phone, email, isFavorite and each has their value. So, contacts.firstName is Ade, contact.lastName is Caleb, contact.phone is +234 805 052 1459, contact.email is caleb0@gmail.com, contact.isFavorite is true.
+    changing an object in state, if you do contacts.firstName = Bolu and  contact.lastName = chris it can't change the state, but you're just change the javascript object and you're modifying, Note: Don't directly modify the existing object. Instead create a new object and give it to the setter.
+    setContact(
+        firstName: "Bolu"
+        lastName = "Chris"
+    )
+    But what if I only want to change one property i can:
+    setPerson({
+        name: "John"
+    }) but there's a problem here, you eventually saying i create a new object that only has one property 
+    So how do we preserve the other properties, by using the spread operator: 
+    setPerson({
+        ...contact //you're essentially spreading its properties into a new object
+        firstName: "Bolu"
+        lastName = "Chris"
+    }) 
+    Updating an object using the previous state. Instead of applying changes we need a callback function that holds the previous value of the state then we are going to apply changes to the previous vlaue itself not directly to the state
+    setContact((prevContact) => {
+      return {
+        ...prevContact,
+        fistName: prevContact.firstName = "Bolu"
+        lastName: prevContact.lastName ="Chris"
+      }  
+    }) Notice what we did here with the prevContact we fistName: prevContact.firstName = "Bolu". Here, prevContact is the variable that contains the entire previous object. If the previous state is:
+    { firstName: "Native", lastName: "Coder", phone: "+234 805 052 1459",email: "caleb0@gmail.com", isFavorite: true } then prevContact will be: { firstName: "Native", lastName: "Coder", phone: "+234 805 052 1459", email: "caleb0@gmail.com", isFavorite: true } so you know we are not changing the value directly we have to use the prevContact. so if we want to change anything we have to acces the propery inside the prevContact and get it's value let's say firstName: "Native" so to access the property value of firstName we can do prevContact.firstName and get the value. 
+    */
+
+    console.log(contacts);
+    /* When the button star is clicked it showed update to filled star if isFavorite is false it should be empty and if isFavorite is true it should be filled */
+    
+    const startToggle = contacts.isFavorite === true ? StarFilled : starEmpty
+
+    const toggleFavorite = function(){
+        console.log("Added to Favorite")
+        setContact((prevContact) => {
+            console.log(prevContact)
+            console.log(typeof(prevContact))
+            return {
+                ...prevContact,
+                firstName: "Ade",
+                lastName: "Caleb",
+                isFavorite: prevContact.isFavorite === false
+            }
+        })
+    }
+    /* isFavorite: prevContact.isFavorite === false 
+    This line is calculating the NEW value that the "isFavorite" property should have. isFavorite This is the property we are creating/updating in the NEW object. You know prevContact is the previous/old state object { firstName: "Native", lastName: "Coder", phone: "+234 805 052 1459", email: "caleb0@gmail.com", isFavorite: true } So "prevContact" represents that whole object. So we do prevContact.isFavorite means: "Go inside the prevContact object and get the value stored in the isFavorite property." The old object is: { isFavorite: true } then prevContact.isFavorite gives us: true
+    "===" is a comparison operator.It asks: "Is the value on the left exactly equal to false?" This give either true or false. So when we do prevContact.isFavorite which is true and we compare it to false after the first click of a button it will now be true === false means: "Is true exactly equal to false?" Answer: false and compare again after the seconf click of a button false === false means: "Is false exactly equal to false?" Answer: true
+    Putting everything together The complete expression is: prevContact.isFavorite === false JavaScript first gets the old value: prevContact.isFavorite Then it compares that value with false.
+    */ 
+ 
+    <article className="card">
+            <img
+                src={avatar}
+                className="avatar"
+                alt="User profile picture of John Doe"
+            />
+            <div className="info">
+                <button
+                    onClick={toggleFavorite}
+                    aria-pressed={startToggle}
+                    aria-label={contacts.isFavorite ? "Remove to Favorites" : "Add to Favorite" }
+                    className="favorite-button"
+                >
+                    <img
+                        src={startToggle}
+                        alt={contacts.isFavorite ? "filled star" : "empty star icon"}
+                        className="favorite"
+                    />
+                </button>
+                <h2 className="name">
+                    {`${contacts.firstName} ${contacts.lastName}`} 
+                </h2>
+                <p className="contact">{contacts.phone}</p>
+                <p className="contact">{contacts.email}</p>
+            </div>
+    </article>
+
+.card {
+  background-color: #0C4A6E;
+  width: 200px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  height: 350px;
+}
+
+.card .avatar {
+  width: 80%;
+  padding: 10%;
+  padding-bottom: 0;
+}
+
+.card .name {
+  margin-block: 13px;
+  color: #fff;
+}
+
+.card .info {
+  padding: 10px;
+}
+
+.card .favorite {
+  width: 25px;
+  cursor: pointer;
+}
+
+.card .contact {
+  font-size: 0.75rem;
+  color: #eee;
+  margin-block: 7px;
+}
+
+.card .favorite-button {
+  border: none;
+  background: transparent;
+}
+
+.card .favorite-button:active {
+  transform: none;
+  box-shadow: none;
+}
+
+
+/* FORM IN REACT  */
+
+* Forms and state
+* onChange
+* events in react form
+* Connecting onChange to state
+* The value prop 
+* Controlled components
+* 
+
