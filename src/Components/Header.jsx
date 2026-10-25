@@ -1,7 +1,7 @@
 import chefClaudeLogo from './Images/chef-claude-icon.png'
 
 const Header = (app) => {
-    console.log(app);
+    // console.log(app);
   return (
     <header>
         <img src={chefClaudeLogo} alt="Chef Claud Logo" />

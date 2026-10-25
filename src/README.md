@@ -653,7 +653,7 @@ Note don't forget that our favoriteThing state is not an empty array again setFa
     }
     /* isFavorite: prevContact.isFavorite === false 
     This line is calculating the NEW value that the "isFavorite" property should have. isFavorite This is the property we are creating/updating in the NEW object. You know prevContact is the previous/old state object { firstName: "Native", lastName: "Coder", phone: "+234 805 052 1459", email: "caleb0@gmail.com", isFavorite: true } So "prevContact" represents that whole object. So we do prevContact.isFavorite means: "Go inside the prevContact object and get the value stored in the isFavorite property." The old object is: { isFavorite: true } then prevContact.isFavorite gives us: true
-    "===" is a comparison operator.It asks: "Is the value on the left exactly equal to false?" This give either true or false. So when we do prevContact.isFavorite which is true and we compare it to false after the first click of a button it will now be true === false means: "Is true exactly equal to false?" Answer: false and compare again after the seconf click of a button false === false means: "Is false exactly equal to false?" Answer: true
+    "===" is a comparison operator.It asks: "Is the value on the left exactly equal to false?" This give either true or false. So when we do prevContact.isFavorite which is true and we compare it to false after the first click of a button it will now be true === false means: "Is true exactly equal to false?" Answer: false and compare again after the second click of a button false === false means: "Is false exactly equal to false?" Answer: true
     Putting everything together The complete expression is: prevContact.isFavorite === false JavaScript first gets the old value: prevContact.isFavorite Then it compares that value with false.
     */ 
  
@@ -738,4 +738,4 @@ Note don't forget that our favoriteThing state is not an empty array again setFa
 * The value prop 
 * Controlled components
 * 
-
+# key={`${detail.email}-${detail.password}`}
