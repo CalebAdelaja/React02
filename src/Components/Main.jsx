@@ -4,10 +4,27 @@ import React from 'react'
 
 const Main = () => {
     /* Refracturing code from using onSubmit to action  */
-    const[ingredients, setIngredients] = React.useState(["all the main spices", "pasta", "ground beef", "tomato paste"])
-    const mapIngredients = ingredients.map((ingre) => {
+    const[ingredients, setIngredients] = React.useState([])
+    const[recipeShown, setRecipeShown] = React.useState(false)
+    const mapIngredients = ingredients.map((ingre, index) => {
         return(
-            <li key={ingre}>{ingre}</li>
+            // <li key={ingre}>{ingre}</li>
+            <li key={`${ingre}-${index}`}>
+                <span>{ingre}</span>
+                {!recipeShown && <button
+                    className="remove-ingredient-button"
+                    type="button"
+                    onClick={() => setIngredients((previousIngredients) =>
+                        previousIngredients.filter((_, ingredientIndex) => {
+                            return ingredientIndex !== index
+                        })
+
+                    )}
+                    aria-label={`Remove ${ingre}`}
+                >
+                    Remove
+                </button>}
+            </li>
         )
     })
     function addIngredient(formData){
@@ -18,7 +35,7 @@ const Main = () => {
         })
     }
     console.log(ingredients)
-    const[recipeShown, setRecipeShown] = React.useState(false)
+    
     const handleRecipe = function() {
         setRecipeShown((prevRecipeShown) => {
             return !prevRecipeShown
